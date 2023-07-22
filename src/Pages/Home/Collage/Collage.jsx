@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Collage_Card from "./College_Card";
+import useCollege from "../../../Hooks/useCollage";
 
 const Collage = () => {
-  const [colleges, setColleges] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/collage")
-      .then((res) => res.json())
-      .then((data) => setColleges(data));
-  }, []);
+  const [colleges] = useCollege();
   return (
     <div className="px-6">
       <h2 className="text-3xl font-semibold text-gray-800 mb-4 mt-4">

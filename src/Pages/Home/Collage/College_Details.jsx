@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
+import useCollege from "../../../Hooks/useCollage";
 
 const College_Details = () => {
-  const [colleges, setColleges] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/collage")
-      .then((res) => res.json())
-      .then((data) => setColleges(data));
-  }, []);
-
+  const [colleges] = useCollege();
   const { collageId } = useParams();
   const college = colleges.find((college) => college._id === collageId);
   return (
