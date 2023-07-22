@@ -1,11 +1,10 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Home from "../Pages/Home/Home/Home";
 import Main from "../Layout/Main";
-import College_Details from "../Pages/Home/Collage/College_Details";
 import Admission from "../Pages/Admission/Admission";
-import Collage from "../Pages/Collage/Collage";
-
+import College_Details from "../Pages/Shared/College/College_Details";
+import College from "../Pages/College/College";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/collage",
-        element: <Collage></Collage>,
+        element: <College></College>,
       },
     ],
   },
