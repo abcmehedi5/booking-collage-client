@@ -1,9 +1,10 @@
 import React from 'react';
+import Collage from '../Collage/Collage';
 
 const Home = () => {
     return (
         <div>
-            <h1>This is home route</h1>
+            <Collage></Collage>
         </div>
     );
 };
