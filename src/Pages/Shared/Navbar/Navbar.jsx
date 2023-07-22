@@ -64,7 +64,7 @@ const Navbar = () => {
           </li>
 
           <li>
-            <Link to="/my-collage">My Collage</Link>
+            <Link to="/my-college">My Collage</Link>
           </li>
         </ul>
       </div>
