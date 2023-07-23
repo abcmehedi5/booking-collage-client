@@ -94,11 +94,14 @@ const Navbar = () => {
             <button onClick={() => handleLogout()} className="btn btn-success">
               logout
             </button>
-            <label className="btn btn-ghost btn-circle avatar">
-              <div className="w-20 rounded-full">
-                <img src={user?.photoURL} />
-              </div>
-            </label>
+            <Link to="/profile">
+              {" "}
+              <label className="btn btn-ghost btn-circle avatar">
+                <div className="w-20 rounded-full">
+                  <img src={user?.photoURL} />
+                </div>
+              </label>
+            </Link>
           </div>
         )}
       </div>
