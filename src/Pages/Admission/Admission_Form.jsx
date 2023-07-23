@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
 import useCollegeById from "../../Hooks/useCollegeById";
+import { AuthContext } from "../../Providers/AuthProvider";
+import useToast from "../../Hooks/useToast";
 
 const Admission_Form = () => {
-  // const { collegeId } = useParams();
+  const { user } = useContext(AuthContext);
   const [college] = useCollegeById();
-  console.log(college.college_name);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -34,10 +34,10 @@ const Admission_Form = () => {
 
           const saveData = {
             candidateName: data.candidateName,
-            candidateEmail: data.candidateEmail,
             dateOfBirth: data.dateOfBirth,
             candidatePhone: data.candidatePhone,
             dateOfBirth: data.dateOfBirth,
+            email: user.email,
             address: data.address,
             subject: data.subject,
             image: photoURL,
@@ -53,8 +53,9 @@ const Admission_Form = () => {
           })
             .then((res) => res.json)
             .then((result) => {
+              console.log(result);
               setLoading(false);
-              alert("data submitted");
+              useToast("success", "admission successfull");
             });
         }
       });
@@ -101,10 +102,8 @@ const Admission_Form = () => {
                 Candidate Email
               </label>
               <input
-                {...register("candidateEmail", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
+                value={user.email}
+                disabled
                 className="input w-full  bg-slate-100 border-gray-400"
                 placeholder="Enter candidate email"
               />
