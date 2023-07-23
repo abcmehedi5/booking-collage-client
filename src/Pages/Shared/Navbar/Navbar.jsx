@@ -55,14 +55,14 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <a className="btn btn-ghost normal-case text-xl">
+        <Link to="/" className="btn btn-ghost uppercase text-xl u">
           <img
             className="w-10"
             src="https://i.ibb.co/r7d6nw8/logo.png"
             alt=""
           />
           Booking Collage
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">

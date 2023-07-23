@@ -36,6 +36,7 @@ const Profile = () => {
       .then((res) => res.json())
       .then((result) => {
         useToast("success", "information update successfull");
+        setIsOpen(false);
       });
   };
 
