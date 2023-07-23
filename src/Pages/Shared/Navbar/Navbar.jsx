@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import useToast from "../../../Hooks/useToast";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+        useToast("success", "Logout successfull");
+      })
+      .catch((error) => {
+        useToast("error", error.message);
+      });
+  };
   return (
     <div className="navbar bg-base-300">
       <div className="navbar-start">
@@ -63,20 +76,31 @@ const Navbar = () => {
             <Link to="/admission">Admission</Link>
           </li>
 
-          <li>
-            <Link to="/my-college">My Collage</Link>
-          </li>
+          {user && (
+            <li>
+              <Link to="/my-college">My Collage</Link>
+            </li>
+          )}
+          {!user && (
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="navbar-end">
-        <div className="flex gap-14">
-          <button className="btn btn-success">logout</button>
-          <label className="btn btn-ghost btn-circle avatar">
-            <div className="w-20 rounded-full">
-              <img src="https://i.ibb.co/r7d6nw8/logo.png" />
-            </div>
-          </label>
-        </div>
+        {user && (
+          <div className="flex gap-14">
+            <button onClick={() => handleLogout()} className="btn btn-success">
+              logout
+            </button>
+            <label className="btn btn-ghost btn-circle avatar">
+              <div className="w-20 rounded-full">
+                <img src={user?.photoURL} />
+              </div>
+            </label>
+          </div>
+        )}
       </div>
     </div>
   );

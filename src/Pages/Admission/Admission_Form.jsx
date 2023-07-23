@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import useCollegeById from "../../Hooks/useCollegeById";
 
 const Admission_Form = () => {
-  const { collegeId } = useParams();
-  console.log("dfdf", collegeId);
+  // const { collegeId } = useParams();
+  const [college] = useCollegeById();
+  console.log(college.college_name);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -39,7 +41,9 @@ const Admission_Form = () => {
             address: data.address,
             subject: data.subject,
             image: photoURL,
-            collegeId: collegeId,
+            college_name: college.college_name,
+            collegeImage: college.image,
+            collegeId: college._id,
           };
           console.log(saveData);
           fetch("http://localhost:5000/admission", {
@@ -63,7 +67,7 @@ const Admission_Form = () => {
           className="bg-white p-8 rounded-lg shadow-md md:w-1/2"
         >
           <h1 className=" text-center p-2 mb-4 rounde text-2xl">
-            Flap the form for admission
+            Flap the form for admission ( {college.college_name})
           </h1>
           <div className="space-y-4">
             <div className="space-y-2">

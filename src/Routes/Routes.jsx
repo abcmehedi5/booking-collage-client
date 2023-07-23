@@ -7,6 +7,9 @@ import College_Details from "../Pages/Shared/College/College_Details";
 import College from "../Pages/College/College";
 import My_Collage from "../Pages/My_Collage/My_Collage";
 import Admission_Form from "../Pages/Admission/Admission_Form";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
+import PrivateRouter from "./PrivateRouter";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/admission-form/:collegeId",
-        element: <Admission_Form></Admission_Form>,
+        element: <PrivateRouter><Admission_Form></Admission_Form></PrivateRouter>,
       },
       {
         path: "/collage",
@@ -34,7 +37,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-college",
-        element: <My_Collage></My_Collage>,
+        element: <PrivateRouter><My_Collage></My_Collage></PrivateRouter>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
     ],
   },

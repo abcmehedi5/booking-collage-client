@@ -11,7 +11,7 @@ const college = () => {
         <div className=" w-3/4">
           {colleges.map((college) => (
             <div
-              key={college.id}
+              key={college._id}
               className="bg-white p-4 rounded-lg shadow-md mt-4"
             >
               <Link to={`/admission-form/${college._id}`}>
