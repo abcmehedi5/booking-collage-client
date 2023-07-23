@@ -1,19 +1,14 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useToast from "../../Hooks/useToast";
+import useMyCollage from "../../Hooks/useMyCollege";
 
 const My_Collage = () => {
   const { user } = useContext(AuthContext);
-  const [admissions, setAdmissions] = useState([]);
   const [feedback, setFeedback] = useState({});
   const inputRef = useRef(null);
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/admission?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => setAdmissions(data));
-  }, []);
+  const [admissions] = useMyCollage();
 
   const handleChnage = (e) => {
     const newfeddback = { ...feedback };
@@ -37,7 +32,7 @@ const My_Collage = () => {
       .then((res) => res.json())
       .then((result) => {
         useToast("success", "feedback send successfull");
-        
+
         // Clear the input field value after successful submission
         inputRef.current.value = "";
       });
