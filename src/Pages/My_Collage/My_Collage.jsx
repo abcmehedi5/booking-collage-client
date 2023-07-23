@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import useToast from "../../Hooks/useToast";
 
 const My_Collage = () => {
   const { user } = useContext(AuthContext);
   const [admissions, setAdmissions] = useState([]);
   const [feedback, setFeedback] = useState({});
-  console.log(feedback);
+  const inputRef = useRef(null);
+
   useEffect(() => {
     fetch(`http://localhost:5000/admission?email=${user.email}`)
       .then((res) => res.json())
@@ -17,6 +19,28 @@ const My_Collage = () => {
     const newfeddback = { ...feedback };
     newfeddback[e.target.name] = e.target.value;
     setFeedback(newfeddback);
+  };
+
+  const handleSend = (admission) => {
+    const saveData = {
+      comment: feedback.comment,
+      userAvatar: user.photoURL,
+      userName: user.displayName,
+      college_name: admission.college_name,
+      date: new Date().toLocaleDateString("en-US"),
+    };
+    fetch("http://localhost:5000/review", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(saveData),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        useToast("success", "feedback send successfull");
+        
+        // Clear the input field value after successful submission
+        inputRef.current.value = "";
+      });
   };
 
   return (
@@ -46,13 +70,20 @@ const My_Collage = () => {
                     <p className="text-gray-600 mb-4">{admission.subject}</p>
                     <div className="flex">
                       <input
+                        // onChange={handleChnage}
                         onChange={handleChnage}
+                        ref={inputRef}
                         className="w-full bg-slate-100 p-2 rounded-sm"
                         type="textarea"
-                        name="feedback"
+                        name="comment"
                         placeholder="Enter your feedback..."
                       />
-                      <button className="btn mx-2">Send</button>
+                      <button
+                        onClick={() => handleSend(admission)}
+                        className="btn mx-2"
+                      >
+                        Send
+                      </button>
                     </div>
                   </div>
                 </div>
