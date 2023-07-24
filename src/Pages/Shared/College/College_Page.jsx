@@ -4,6 +4,8 @@ import useCollege from "../../../Hooks/useCollage";
 
 const College_Page = ({title}) => {
   const [colleges] = useCollege();
+
+  console.log(colleges);
   return (
     <div className="px-6">
       <h2 className="text-3xl font-semibold text-gray-800 mb-4 mt-4">

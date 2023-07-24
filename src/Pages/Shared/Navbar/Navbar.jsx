@@ -1,20 +1,20 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useRef, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
-import useToast from "../../../Hooks/useToast";
+import useCollege from "../../../Hooks/useCollage";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
-  const handleLogout = () => {
-    logOut()
-      .then(() => {
-        // Sign-out successful.
-        useToast("success", "Logout successfull");
-      })
-      .catch((error) => {
-        useToast("error", error.message);
-      });
+  const { user } = useContext(AuthContext);
+  const [search, setSearch] = useState("");
+  const inputRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    const searchData = inputRef.current.value;
+    setSearch(searchData);
+    // navigate("/collage");
   };
+  const [colleges] = useCollege(search);
   return (
     <div className="navbar bg-base-300">
       <div className="navbar-start">
@@ -58,7 +58,7 @@ const Navbar = () => {
         <Link to="/" className="btn btn-ghost uppercase text-xl u">
           <img
             className="w-10"
-            src="https://i.ibb.co/r7d6nw8/logo.png"
+            src="https://images.vexels.com/media/users/3/142789/isolated/preview/2bfb04ad814c4995f0c537c68db5cd0b-multicolor-swirls-circle-logo.png"
             alt=""
           />
           Booking Collage
@@ -89,13 +89,20 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="Search"
+          className="input input-bordered w-2/4 max-w-xs"
+        />
+
+        <button className="btn btn-primary mr-10 ml-3 " onClick={handleSearch}>
+          Search
+        </button>
+
         {user && (
           <div className="flex gap-14">
-            <button onClick={() => handleLogout()} className="btn btn-success">
-              logout
-            </button>
             <Link to="/profile">
-              {" "}
               <label className="btn btn-ghost btn-circle avatar">
                 <div className="w-20 rounded-full">
                   <img src={user?.photoURL} />

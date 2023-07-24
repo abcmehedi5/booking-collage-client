@@ -13,7 +13,8 @@ const Profile = () => {
     formState: { errors },
   } = useForm();
 
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
   const [admissions] = useMyCollage();
   const [singleAdmission, setSingleAdmission] = useState({});
   let [isOpen, setIsOpen] = useState(false);
@@ -40,6 +41,19 @@ const Profile = () => {
       });
   };
 
+  // logout 
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+        useToast("success", "Logout successfull");
+      })
+      .catch((error) => {
+        useToast("error", error.message);
+      });
+  };
+
   return (
     <div className="mb-20 p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-center items-center md:h-96 justify-center ">
@@ -51,6 +65,9 @@ const Profile = () => {
           />
           <h4 className="mt-4 text-3xl">{user?.displayName}</h4>
           <h4 className="mt-1 text-md">{user?.email}</h4>
+          <button onClick={() => handleLogout()} className="btn btn-success mt-5">
+              logout
+            </button>
         </div>
 
         {/*  right side ---------------------------- */}
