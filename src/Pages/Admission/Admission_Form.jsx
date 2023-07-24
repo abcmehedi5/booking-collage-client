@@ -46,7 +46,7 @@ const Admission_Form = () => {
             collegeId: college._id,
           };
           console.log(saveData);
-          fetch("http://localhost:5000/admission", {
+          fetch("https://college-booking-server-abcmehedi5.vercel.app/admission", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(saveData),

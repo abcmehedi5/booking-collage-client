@@ -6,7 +6,7 @@ const useMyCollage = () => {
   const [admissions, setAdmissions] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/admission?email=${user?.email}`)
+    fetch(`https://college-booking-server-abcmehedi5.vercel.app/admission?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setAdmissions(data));
   }, []);

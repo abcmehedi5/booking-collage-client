@@ -29,7 +29,7 @@ const Profile = () => {
 
   //   update admission information
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/admission/" + singleAdmission._id, {
+    fetch("https://college-booking-server-abcmehedi5.vercel.app/admission/" + singleAdmission._id, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),

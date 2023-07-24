@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 const Research = () => {
   const [researchs, setResearchs] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/research")
+    fetch("https://college-booking-server-abcmehedi5.vercel.app/research")
       .then((res) => res.json())
       .then((data) => setResearchs(data));
   }, []);

@@ -24,7 +24,7 @@ const My_Collage = () => {
       college_name: admission.college_name,
       date: new Date().toLocaleDateString("en-US"),
     };
-    fetch("http://localhost:5000/review", {
+    fetch("https://college-booking-server-abcmehedi5.vercel.app/review", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(saveData),

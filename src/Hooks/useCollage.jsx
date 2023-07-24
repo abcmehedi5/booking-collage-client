@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 const useCollege = (search) => {
   const [colleges, setColleges] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/collage?search=${search}`)
-    // fetch(`http://localhost:5000/collage`)
+    fetch(`https://college-booking-server-abcmehedi5.vercel.app/collage?search=${search}`)
+    // fetch(`https://college-booking-server-abcmehedi5.vercel.app/collage`)
       .then((res) => res.json())
       .then((data) => setColleges(data))
       .catch((error) => {
